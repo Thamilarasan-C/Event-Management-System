@@ -63,14 +63,20 @@ The Event Management System is a platform designed to help event organizers to m
   - 4.Find ticketDetailsId using uventId reduce the ticketAvailabls by attendeeCount.
   - 5.Send registrationId, ticketDetailsId , attendeesId and generate ticketTokens for each attendeee fo that event and save it in a ticket table.
 
-### 6. Attendee management
--`api (Get)` :- "attendee/getAttendeeDetails/{organizerId}"
--`api (Get)` :- "attendee/getAttendeeDetails/{userId}"
--`api (Post)` :- "attendee/allowtoAttendEvent"
+### 6. Ticket Validation and entry access
+-`api (Post)` :- "ticketRegistration/ticketValidation"
 
-- **View attendee details** Users can see the attendees they registered and organizers can see the attendees registered of their event.
+- **Ticket Token validation** Attendees need not to be an user to validate their token.
 - - **Work flow:**
-  - 1.From Event table and ticket table ,the event details are taken and send list of EventPoster(dto) as a response.
-  - 2.Attendees are allowed to attend the events based on the ticketToken.
-### 7. Other apis
+  - 1.Ticket token is validated by checking the presence of ticket in a tiket repo.
+  - 2.Attendees are allowed to attend the respective events based on the ticketToken.
+  - 
+### 7. Attendee management
+-`api (Get)` :- "attendee/getAttendees/event/{eventId}"
+
+- **View attendee details** Attendee details can be get by using the eventId
+- - **Work flow:**
+    -By joining attendee table registration table and event table it will get the Attendees of the event
+    
+### 8. Other apis
   some other apis are added to cross check the details
