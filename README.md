@@ -21,7 +21,7 @@ The Event Management System is a platform designed to help event organizers to m
 
 ### 1. User Registration
 -`api (Post)` :- "user/signUp"
-- **User Registration:** Allow  the users to register as a public user and organizer as their roles in our application.
+- **User Registration:** Allow  the users to register as a user and organizer as their roles in our application.
 - **Entity - User:** The registered users and their informations will be stored in the user table.
 - **Work flow:**
   - 1.From SignUpRequest(dto) email, name , password(encoded)and roles are taken and saved it in a user table.
@@ -70,7 +70,7 @@ The Event Management System is a platform designed to help event organizers to m
 - - **Work flow:**
   - 1.Ticket token is validated by checking the presence of ticket in a tiket repo.
   - 2.Attendees are allowed to attend the respective events based on the ticketToken.
-  - 
+    
 ### 7. Attendee management
 -`api (Get)` :- "attendee/getAttendees/event/{eventId}"
 
