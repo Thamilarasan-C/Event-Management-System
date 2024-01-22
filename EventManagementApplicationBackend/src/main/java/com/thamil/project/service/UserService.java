@@ -28,6 +28,7 @@ public class UserService {
 
   @Autowired
   private AuthenticationManager authenticationManager;
+
   public LoginResponse saveUser(SignUpRequest signUpRequest) throws CustomException {
 
     if (signUpRequest.getEmailId() == null)
@@ -42,36 +43,15 @@ public class UserService {
         .password(passwordEncoder.encode(signUpRequest.getPassword()))
         .role(Role.valueOf(signUpRequest.getRole().toUpperCase()))
         .build();
-    
+
     repo.save(user);
     return new LoginResponse(jwtService.generateToken(user));
   }
 
   public LoginResponse validateUser(LoginRequest loginRequest) {
-    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmailId(),loginRequest.getPassword()));
+    authenticationManager
+        .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmailId(), loginRequest.getPassword()));
     User user = repo.findByEmailId(loginRequest.getEmailId()).orElseThrow();
     return new LoginResponse(jwtService.generateToken(user));
   }
-
-  // public User validateUser(LoginRequest loginRequest) throws CustomException {
-
-  //   if (!repo.existsByName(loginRequest.getUserName()))
-  //     throw new CustomException("User name not found");
-
-  //   Optional<User> user = repo.findByName(loginRequest.getUserName());
-
-  //   if (loginRequest.getPassword().equals(user.get().getPassword()))
-  //     return user.get();
-
-  //   throw new CustomException("Incorrect Password");
-  // }
-
-  // public LoginResponse generateToken(User user) {
-  //   Claims claims = Jwts.claims().setSubject(user.getName());
-  //   claims.put("role", user.getRole());
-  //   claims.put("userId", user.getId());
-  //   String token = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS256,
-  //       "ur97q2e7r2934892rnu213rn09217349782190348y12").compact();
-  //   return new LoginResponse(token);
-  // }
 }
