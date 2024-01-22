@@ -23,7 +23,8 @@ public class TicketRegistrationController {
   private TicketRegistrationService service;
 
   @PostMapping("/saveRegistration")
-  public ResponseEntity<List<TicketToken>> insertUser(@RequestBody TicketRegistration ticketRegistration) throws CustomException{
+  public ResponseEntity<List<TicketToken>> insertUser(@RequestBody TicketRegistration ticketRegistration)
+      throws CustomException {
     return new ResponseEntity<List<TicketToken>>(service.saveTicketRegistration(ticketRegistration), HttpStatus.OK);
   }
 }

@@ -43,7 +43,7 @@ public class UserService {
         .build();
 
     repo.save(user);
-    return new LoginResponse(jwtService.generateToken(new HashMap<>user));
+    return new LoginResponse(jwtService.generateToken(user));
   }
 
   public LoginResponse validateUser(LoginRequest loginRequest) {
