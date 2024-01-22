@@ -11,6 +11,7 @@ import com.thamil.project.dto.LoginRequest;
 import com.thamil.project.dto.LoginResponse;
 import com.thamil.project.dto.SignUpRequest;
 import com.thamil.project.exception.CustomException;
+import com.thamil.project.model.Role;
 import com.thamil.project.model.User;
 import com.thamil.project.repository.UserRepo;
 
@@ -39,9 +40,9 @@ public class UserService {
         .emailId(signUpRequest.getEmailId())
         .name(signUpRequest.getName())
         .password(passwordEncoder.encode(signUpRequest.getPassword()))
-        .role(signUpRequest.getRole())
+        .role(Role.valueOf(signUpRequest.getRole().toUpperCase()))
         .build();
-
+    
     repo.save(user);
     return new LoginResponse(jwtService.generateToken(user));
   }

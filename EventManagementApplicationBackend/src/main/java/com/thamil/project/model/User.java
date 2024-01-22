@@ -34,12 +34,12 @@ public class User implements UserDetails {
   private String emailId;
   private String name;
   private String password;
-  // @Enumerated(EnumType.STRING)
-  private String role;
+  @Enumerated(EnumType.STRING)
+  private Role role;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of(new SimpleGrantedAuthority(getRole()));
+    return List.of(new SimpleGrantedAuthority("ROLE_"+role.name()));
   }
 
   @Override
