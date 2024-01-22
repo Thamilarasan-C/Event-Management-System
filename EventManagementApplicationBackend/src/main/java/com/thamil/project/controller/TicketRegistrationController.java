@@ -27,4 +27,8 @@ public class TicketRegistrationController {
       throws CustomException {
     return new ResponseEntity<List<TicketToken>>(service.saveTicketRegistration(ticketRegistration), HttpStatus.OK);
   }
+  @PostMapping("/ticketValidation")
+  public ResponseEntity<TicketToken> validateTicketToken(@RequestBody TicketToken ticketToken){
+    return new ResponseEntity<TicketToken>(service.validateTicketToken(ticketToken),HttpStatus.OK);
+  }
 }

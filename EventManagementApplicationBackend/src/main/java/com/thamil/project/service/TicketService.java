@@ -8,16 +8,16 @@ import com.thamil.project.repository.TicketRepo;
 
 @Service
 public class TicketService {
-  
+
   @Autowired
   private TicketRepo repo;
 
-  public Ticket saveTicket(Ticket ticket){
+  public Ticket saveTicket(Ticket ticket) {
     return repo.save(ticket);
   }
 
   public Ticket updateStatus(Long ticketId, boolean isPresent) {
-    return repo.updateStatus(ticketId,isPresent);
+    return repo.updateStatus(ticketId, isPresent);
   }
 
 }

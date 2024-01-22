@@ -24,15 +24,16 @@ public class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    System.out.println("security filter");
     http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(requests -> requests
-            .requestMatchers("/user/signUp/**")
+            .requestMatchers("/user/**", "/ticketRegistration/ticketValidation")
             .permitAll()
-            .requestMatchers("eventInfo/saveEventInfo**").hasRole("ORGANIZER")
-            .requestMatchers("eventInfo/eventPoster/**").hasRole("USER")
-            .requestMatchers("eventInfo/getAllEventInfo/**").hasRole("ADMIN")
-             .anyRequest()
+            .requestMatchers("eventInfo/saveEventInfo").hasRole("ORGANIZER")
+            .requestMatchers("eventInfo/getEventPosters/**").hasAnyRole("USER", "ORGANIZER", "ADMIN")
+            .requestMatchers("eventInfo/getAllEventInfo").hasRole("ADMIN")
+            .requestMatchers("/ticketRegistration/saveRegistration").hasAnyRole("USER", "ORGANIZER")
+            .requestMatchers("/**").hasRole("ADMIN")
+            .anyRequest()
             .authenticated())
         .sessionManagement(management -> management
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
