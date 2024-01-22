@@ -73,4 +73,4 @@ The Event Management System is a platform designed to help event organizers to m
   - 1.From Event table and ticket table ,the event details are taken and send list of EventPoster(dto) as a response.
   - 2.Attendees are allowed to attend the events based on the ticketToken.
 ### 7. Other apis
-  some other apis are added to cross chect the details
+  some other apis are added to cross check the details
