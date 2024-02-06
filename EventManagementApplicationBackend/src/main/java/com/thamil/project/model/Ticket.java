@@ -36,4 +36,5 @@ public class Ticket {
   @JoinColumn(name = "ticketDetailsId", insertable = false, updatable = false)
   private TicketDetails ticketdetails;
   private boolean isAttended;
+  private boolean isCancelled;
 }

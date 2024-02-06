@@ -75,8 +75,6 @@ public class EventInfoService {
 
     for (Event event : events) {
 
-      System.out.println("Event id: " + event.getEventId());
-
       Optional<TicketDetails> ticketsDetail = ticketDetailsRepo.findByEventId(event.getEventId());
 
       TicketDetails ticketDetails = ticketsDetail.get();

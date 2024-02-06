@@ -15,6 +15,6 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<String> handleException(Exception e) {
-    return new ResponseEntity<>("Internal server error", HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>("Error", HttpStatus.NOT_FOUND);
   }
 }

@@ -25,6 +25,13 @@ public class TicketDetailsService {
     return repo.save(ticketDetails);
   }
 
+  public int findTicketsAvailable(Long eventId) throws CustomException{
+    Optional<TicketDetails> ticketDetails = repo.findByEventId(eventId);
+    if(ticketDetails.isPresent())
+    return ticketDetails.get().getTicketsAvailable();
+    throw new CustomException("No ticket details found with this eventId");
+  }
+
   @Transactional
   public void updateTicketCounts(Long eventId, int bookedTicketCount) throws CustomException{
     if(eventId != null && eventRepo.existsById(eventId))
@@ -37,5 +44,9 @@ public class TicketDetailsService {
     if(ticketDetails.isPresent())
     return ticketDetails.get();
     throw new CustomException("No ticket details found with this ticketId");
+  }
+
+  public void updateTicketCountByOne(String ticketToken){
+    repo.increaseTicketCount(ticketToken);
   }
 }

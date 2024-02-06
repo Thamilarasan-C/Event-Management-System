@@ -22,4 +22,9 @@ public interface TicketDetailsRepo extends JpaRepository<TicketDetails, Long> {
   void updateTicketCount(@Param("eventId") Long eventId, @Param("bookedTicketCount") int bookedTicketCount);
 
   Optional<TicketDetails> findByEventId(Long eventId);
+
+  @Modifying
+  @Query("UPDATE TicketDetails td JOIN Ticket t ON td.ticketDetailsId = t.ticketDetailsId JOIN Registration r ON t.registrationId = r.registrationId JOIN Event e ON r.eventId = e.eventId SET td.ticketsAvailable = td.ticketsAvailable + 1 WHERE t.ticketToken = :ticketToken;")
+  void increaseTicketCount(String ticketToken);
+
 }

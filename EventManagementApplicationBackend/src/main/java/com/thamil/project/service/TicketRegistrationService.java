@@ -35,6 +35,8 @@ public class TicketRegistrationService {
   @Autowired
   private TicketRepo ticketRepo;
 
+  private TicketDetailsService ticketDetailsService;
+
   private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   private static final int STRING_LENGTH = 10;
 
@@ -43,6 +45,11 @@ public class TicketRegistrationService {
   public List<TicketToken> saveTicketRegistration(TicketRegistration ticketRegistration) throws CustomException {
 
     List<TicketToken> ticketTokens = new ArrayList<TicketToken>();
+
+    int ticketsAvailable = ticketDetailsService.findTicketsAvailable(ticketRegistration.getEventId());
+
+    if (ticketsAvailable > ticketRegistration.getAttendees().size())
+      throw new CustomException("Only " + ticketsAvailable + "tickets available");
 
     Registration registration = Registration.builder()
         .userId(ticketRegistration.getUserId())
@@ -68,6 +75,7 @@ public class TicketRegistrationService {
           .ticketToken(ticketTokenString)
           .ticketDetailsId(ticketDetailsId)
           .isAttended(false)
+          .isCancelled(false)
           .build();
       ticketRepo.save(ticket);
       ticketTokens
@@ -103,7 +111,7 @@ public class TicketRegistrationService {
     String tokenString = ticketToken.getTicketToken();
     Optional<Ticket> ticket = ticketRepo.findByTicketToken(tokenString);
     if (!ticket.isPresent())
-    throw new CustomException("Invalid ticket");
+      throw new CustomException("Invalid ticket");
     return ticketToken;
   }
 }

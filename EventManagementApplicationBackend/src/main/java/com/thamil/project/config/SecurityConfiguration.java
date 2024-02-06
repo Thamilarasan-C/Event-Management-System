@@ -28,9 +28,7 @@ public class SecurityConfiguration {
         .authorizeHttpRequests(requests -> requests
             .requestMatchers("/user/**", "/ticketRegistration/ticketValidation")
             .permitAll()
-            .requestMatchers("eventInfo/saveEventInfo").hasRole("ORGANIZER")
-            .requestMatchers("eventInfo/getEventPosters/**").hasAnyRole("USER", "ORGANIZER", "ADMIN")
-            .requestMatchers("eventInfo/getAllEventInfo").hasRole("ADMIN")
+            .requestMatchers("eventInfo/**").hasAnyRole("USER", "ORGANIZER", "ADMIN")
             .requestMatchers("/ticketRegistration/saveRegistration").hasAnyRole("USER", "ORGANIZER")
             .requestMatchers("/**").hasRole("ADMIN")
             .anyRequest()
