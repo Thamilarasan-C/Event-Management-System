@@ -13,9 +13,8 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
   }
 
-  @ExceptionHandler(InternalError.class)
+  @ExceptionHandler(Exception.class)
   public ResponseEntity<String> handleException(Exception e) {
     return new ResponseEntity<>("Internal server error", HttpStatus.NOT_FOUND);
   }
-
 }

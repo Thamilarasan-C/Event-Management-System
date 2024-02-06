@@ -20,6 +20,6 @@ public interface TicketRepo extends JpaRepository<Ticket, Long> {
 
   boolean existsByTicketToken(String ticketTokenString);
 
-  Optional<TicketToken> findByTicketToken(String userName);
+  Optional<Ticket> findByTicketToken(String userName);
 
 }

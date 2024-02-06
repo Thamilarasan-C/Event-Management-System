@@ -32,7 +32,7 @@ public class AttendeeController {
     return new ResponseEntity<Attendee>(a, HttpStatus.OK);
   }
 
-  @GetMapping("/getAttendees/event/{eventId}")
+  @GetMapping("/event/{eventId}")
   public ResponseEntity<List<Attendee>> selectEvents(@PathVariable Long eventId) {
       List<Attendee> attendees = service.findAttendeesByEventId(eventId);
       if (attendees == null) {

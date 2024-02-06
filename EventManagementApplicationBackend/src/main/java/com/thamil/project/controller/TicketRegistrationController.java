@@ -22,13 +22,14 @@ public class TicketRegistrationController {
   @Autowired
   private TicketRegistrationService service;
 
-  @PostMapping("/saveRegistration")
+  @PostMapping
   public ResponseEntity<List<TicketToken>> insertUser(@RequestBody TicketRegistration ticketRegistration)
       throws CustomException {
     return new ResponseEntity<List<TicketToken>>(service.saveTicketRegistration(ticketRegistration), HttpStatus.OK);
   }
+
   @PostMapping("/ticketValidation")
-  public ResponseEntity<TicketToken> validateTicketToken(@RequestBody TicketToken ticketToken){
-    return new ResponseEntity<TicketToken>(service.validateTicketToken(ticketToken),HttpStatus.OK);
+  public ResponseEntity<TicketToken> validateTicketToken(@RequestBody TicketToken ticketToken) throws CustomException {
+    return new ResponseEntity<TicketToken>(service.validateTicketToken(ticketToken), HttpStatus.OK);
   }
 }

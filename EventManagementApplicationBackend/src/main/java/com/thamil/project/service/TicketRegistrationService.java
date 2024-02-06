@@ -99,12 +99,11 @@ public class TicketRegistrationService {
     return randomString;
   }
 
-  public TicketToken validateTicketToken(TicketToken ticketToken) {
+  public TicketToken validateTicketToken(TicketToken ticketToken) throws CustomException {
     String tokenString = ticketToken.getTicketToken();
-    Optional<TicketToken> token = ticketRepo.findByTicketToken(tokenString);
-    if(!token.isPresent() || ticketToken.getAttendeeEmailId()!=token.get().getAttendeeEmailId())
-     new CustomException("Invalid ticket");
-     ticketRepo.updateStatus(tokenString,true);
-     return token.get();
+    Optional<Ticket> ticket = ticketRepo.findByTicketToken(tokenString);
+    if (!ticket.isPresent())
+    throw new CustomException("Invalid ticket");
+    return ticketToken;
   }
 }

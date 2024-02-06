@@ -30,7 +30,7 @@ public class EventInfoService {
     Event createdEvent = eventRepo.save(event);
     ticketDetails.setEventId(createdEvent.getEventId());
     ticketDetailsRepo.save(ticketDetails);
-    return "Event Successfuly added";
+    return "Event Successfully added";
   }
 
   public Event eventFromEventInfo(EventInfo eventInfo) {

@@ -23,7 +23,6 @@ public class RegistrationService {
   public Registration saveRegistration(Registration registration) throws CustomException {
     registration.setDate(LocalDate.now());
     registration.setTime(LocalTime.now());
-    System.out.println("vhujghhikh  save regi 5" + registration.getEventId());
     ticketDetailsService.updateTicketCounts(registration.getEventId(), registration.getTicketCount());
     return repo.save(registration);
   }

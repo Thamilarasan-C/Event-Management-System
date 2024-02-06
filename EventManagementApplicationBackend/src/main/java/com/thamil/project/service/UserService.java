@@ -44,14 +44,14 @@ public class UserService {
         .role(Role.valueOf(signUpRequest.getRole().toUpperCase()))
         .build();
 
-    repo.save(user);
-    return new LoginResponse(jwtService.generateToken(user));
+    user = repo.save(user);
+    return new LoginResponse(jwtService.generateToken(user, user.getId(), user.getRole()));
   }
 
   public LoginResponse validateUser(LoginRequest loginRequest) {
     authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmailId(), loginRequest.getPassword()));
     User user = repo.findByEmailId(loginRequest.getEmailId()).orElseThrow();
-    return new LoginResponse(jwtService.generateToken(user));
+    return new LoginResponse(jwtService.generateToken(user, user.getId(), user.getRole()));
   }
 }

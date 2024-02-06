@@ -23,17 +23,17 @@ public class EventInfoController {
   @Autowired
   private EventInfoService service;
 
-  @PostMapping("/saveEventInfo")
+  @PostMapping
   public ResponseEntity<String> insertEvent(@RequestBody EventInfo eventInfo) {
     return new ResponseEntity<String>(service.saveEvent(eventInfo), HttpStatus.OK);
   }
 
-  @GetMapping("/getAllEventInfo")
+  @GetMapping
   public ResponseEntity<List<EventInfo>> getAllEvents() {
     return new ResponseEntity<List<EventInfo>>(service.getAllEventsInfo(), HttpStatus.OK);
   }
 
-  @GetMapping("/getEventPosters/{status}")
+  @GetMapping("/{status}")
   public ResponseEntity<List<EventPoster>> getEventsInfo(@PathVariable String status) {
     return new ResponseEntity<List<EventPoster>>(service.getEventsInfo(status), HttpStatus.OK);
   }
